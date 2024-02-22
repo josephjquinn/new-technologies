@@ -1,22 +1,31 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StringSplitter {
 
     public static String[] splitString(String inputString, String size) {
-        // Remove whitespaces from the input string
         inputString = inputString.replaceAll(" ", "");
-
-
-        int chunkSizeInt = Integer.parseInt(size);
-        List<String> chunks = new ArrayList<>();
-        for (int i = 0; i < inputString.length(); i += chunkSizeInt) {
-            // Ensure that i + chunkSizeInt does not exceed the length of the inputString
-            chunks.add(inputString.substring(i, Math.min(i + chunkSizeInt, inputString.length())));
+        List<String> words = new ArrayList<>();
+        if(size.contains("-")){
+            String[] range = size.split("-");
+            int start = Integer.parseInt(range[0]);
+            int end = Integer.parseInt(range[1]);
+            int i = 0;
+            boolean useStart = true;
+            while (i < inputString.length()) {
+                int pos = useStart ? start : end;
+                words.add(inputString.substring(i, Math.min(i + pos, inputString.length())));
+                useStart = !useStart;
+                i += pos;
+            }
         }
-        return chunks.toArray(new String[0]);
-
+        else{
+            int chunkSizeInt = Integer.parseInt(size);
+            for (int i = 0; i < inputString.length(); i += chunkSizeInt) {
+                words.add(inputString.substring(i, Math.min(i + chunkSizeInt, inputString.length())));
+            }
+        }
+        return words.toArray(new String[0]);
     }
 
     public static String[] sortString(String[] words) {
