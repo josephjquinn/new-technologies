@@ -3,10 +3,10 @@ import java.util.List;
 
 public class StringSplitter {
 
-    public static String[] splitString(String inputString, String size) {
+    public static String[] splitString(String inputString, String size, boolean sort) {
         inputString = inputString.replaceAll(" ", "");
         List<String> words = new ArrayList<>();
-        if(size.contains("-")){
+        if (size.contains("-")) {
             String[] range = size.split("-");
             int start = Integer.parseInt(range[0]);
             int end = Integer.parseInt(range[1]);
@@ -18,28 +18,44 @@ public class StringSplitter {
                 useStart = !useStart;
                 i += pos;
             }
-        }
-        else{
+        } else {
             int chunkSizeInt = Integer.parseInt(size);
             for (int i = 0; i < inputString.length(); i += chunkSizeInt) {
                 words.add(inputString.substring(i, Math.min(i + chunkSizeInt, inputString.length())));
             }
         }
-        return words.toArray(new String[0]);
+
+        String[] wordArray = words.toArray(new String[0]);
+
+        if (sort) {
+            sortString(wordArray);
+        }
+        return wordArray;
     }
 
     public static String[] sortString(String[] words) {
         for (int i = words.length - 1; i > 0; i--) {
             for (int j = words.length - 1; j > words.length - i - 1; j--) {
-                if (words[j].matches("[A-Z]+") && words[j - 1].matches("[a-z]+")) {
-                    swap(words, j, j - 1);
-                } else if (words[j].matches("[a-z]+") && words[j - 1].matches("[A-Z]+")) {
-                } else if (words[j].compareTo(words[j - 1]) < 0) {
+                if (compare(words[j], words[j - 1])) {
                     swap(words, j, j - 1);
                 }
             }
         }
         return words;
+    }
+
+    private static boolean compare(String a, String b) {
+        if (Character.isUpperCase(a.charAt(0)) && Character.isLowerCase(b.charAt(0))) {
+            return true;
+        } else if (Character.isLowerCase(a.charAt(0)) && Character.isUpperCase(b.charAt(0))) {
+            return false;
+        } else if (Character.isDigit(a.charAt(0)) && !Character.isDigit(b.charAt(0))) {
+            return true;
+        } else if (!Character.isDigit(a.charAt(0)) && Character.isDigit(b.charAt(0))) {
+            return false;
+        } else {
+            return a.compareTo(b) < 0;
+        }
     }
 
     private static void swap(String[] arr, int i, int j) {

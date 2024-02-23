@@ -1,6 +1,5 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import java.util.List;
 
 public class TestMain {
 
@@ -9,7 +8,7 @@ public class TestMain {
         String inputString = "abcdefghijklmnopqrstuvwxyz";
         String chunkSize = "4";
         String[] expectedChunks= {"abcd","efgh", "ijkl", "mnop", "qrst", "uvwx", "yz"};
-        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize);
+        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, false);
         assertEquals(expectedChunks, actualChunks);
     }
 
@@ -18,7 +17,7 @@ public class TestMain {
         String inputString = "hellomywonderfulfriend2000";
         String chunkSize = "5";
         String[] expectedChunks = {"hello", "mywon", "derfu", "lfrie", "nd200", "0"};
-        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize);
+        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, false);
         assertEquals(expectedChunks, actualChunks);
     }
 
@@ -27,7 +26,7 @@ public class TestMain {
         String inputString = "abcdefghijklmnopqrstuvwxyz";
         String chunkSize = "4-6";
         String[] expectedChunks = {"abcd", "efghij", "klmn", "opqrst", "uvwx", "yz"};
-        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize);
+        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, false);
         assertEquals(expectedChunks, actualChunks);
     }
 
@@ -36,7 +35,7 @@ public class TestMain {
         String inputString = "hellomywonderfulfriend2000";
         String chunkSize = "1-5";
         String[] expectedChunks = {"h", "ellom", "y", "wonde", "r", "fulfr", "i", "end20", "0", "0"};
-        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize);
+        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, false);
         assertEquals(expectedChunks, actualChunks);
     }
 
@@ -45,7 +44,7 @@ public class TestMain {
         String inputString = "abcdEfghijklmnoPqrsTuvwxyz";
         String chunkSize = "4-6";
         String[] expectedChunks = {"Efghij", "abcd", "klmn", "oPqrsT", "uvwx", "yz"};
-        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize);
+        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, true);
         assertEquals(expectedChunks, actualChunks);
     }
 
@@ -54,7 +53,7 @@ public class TestMain {
         String inputString = "hellomywonderfulfriend2000";
         String chunkSize = "1-5";
         String[] expectedChunks = {"0", "0", "ellom", "end20", "fulfr", "h", "i", "r", "wonde", "y"};
-        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize);
+        String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, true);
         assertEquals(expectedChunks, actualChunks);
     }
 
