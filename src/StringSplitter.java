@@ -4,6 +4,9 @@ import java.util.List;
 public class StringSplitter {
 
     public static String[] splitString(String inputString, String size, boolean sort) {
+        if (!size.matches("\\d+(-\\d+)?")) {
+            throw new IllegalArgumentException("Invalid size");
+        }
         inputString = inputString.replaceAll(" ", "");
         List<String> words = new ArrayList<>();
         if (size.contains("-")) {

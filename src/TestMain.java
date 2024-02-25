@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import org.junit.Test;
 
 public class TestMain {
@@ -55,6 +56,55 @@ public class TestMain {
         String[] expectedChunks = {"0", "0", "ellom", "end20", "fulfr", "h", "i", "r", "wonde", "y"};
         String[] actualChunks = StringSplitter.splitString(inputString, chunkSize, true);
         assertEquals(expectedChunks, actualChunks);
+    }
+
+    @Test
+    public void testSplitString123() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "four";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
+    }
+
+    @Test
+    public void testSplitString1232() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "four-six";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
+    }
+
+    @Test
+    public void testSplitString12332() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "3.2";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
+    }
+
+    @Test
+    public void testSplitString7() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "1-";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
+    }
+
+    @Test
+    public void testSplitString8() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "-5";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
+    }
+
+    @Test
+    public void testSplitString9() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "-";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
+    }
+
+    @Test
+    public void testSplitString10() {
+        String inputString = "abcdefghijklmnopqrstuvwxyz";
+        String chunkSize = "1--3";
+        assertThrows(IllegalArgumentException.class, () -> StringSplitter.splitString(inputString,chunkSize,false));
     }
 
     @Test
