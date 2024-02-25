@@ -1,9 +1,13 @@
+// Author: Joseph Quinn
+// Date: 02/22/2024
+// Description: This class provides utility methods for splitting and sorting strings.
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringSplitter {
 
-    public static String[] splitString(String inputString, String size, boolean sort) {
+    public static String[] split(String inputString, String size, boolean sort) {
         if (!size.matches("\\d+(-\\d+)?")) {
             throw new IllegalArgumentException("Invalid size");
         }
@@ -31,12 +35,12 @@ public class StringSplitter {
         String[] wordArray = words.toArray(new String[0]);
 
         if (sort) {
-            sortString(wordArray);
+            sort(wordArray);
         }
         return wordArray;
     }
 
-    public static String[] sortString(String[] words) {
+    public static String[] sort(String[] words) {
         for (int i = words.length - 1; i > 0; i--) {
             for (int j = words.length - 1; j > words.length - i - 1; j--) {
                 if (compare(words[j], words[j - 1])) {
