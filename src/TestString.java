@@ -75,7 +75,7 @@ public class TestString {
     }
 
     @Test
-    public void testSortExample1() {
+    public void testSortMethod1() {
         String[] words = {"abcd", "Efghij", "klmn", "oPqrsT", "uvwx", "yz"};
         String[] expectedSortedWords = {"Efghij", "abcd", "klmn", "oPqrsT", "uvwx", "yz"};
         String[] actualSortedWords = StringSplitter.sort(words);
@@ -83,7 +83,7 @@ public class TestString {
     }
 
     @Test
-    public void testSortExample2() {
+    public void testSortMethod2() {
         String[] words = {"h", "ellom", "y", "wonde", "r", "fulfr", "i", "end20", "0", "0"};
         String[] expectedSortedWords = {"0", "0", "ellom", "end20", "fulfr", "h", "i", "r", "wonde", "y"};
         String[] actualSortedWords = StringSplitter.sort(words);
